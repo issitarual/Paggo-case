@@ -1,14 +1,21 @@
 import { Grid, Link } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { Dispatch, SetStateAction } from "react";
 
-export default function SignSubmitButton({route, command}: { route: string; command: string; }) {
-  const router = useRouter();
-
+export default function SignSubmitButton({
+  setLogin,
+  isLogin,
+  command,
+}: {
+  setLogin: Dispatch<SetStateAction<boolean>>;
+  isLogin: boolean;
+  command: string;
+}) {
   return (
     <Grid container alignItems="center" justifyContent="center">
       <Grid item>
         <Link
-          onClick={() => router.push(route)}
+          onClick={() => setLogin(!isLogin)}
           variant="body2"
           sx={{ cursor: "pointer" }}
         >

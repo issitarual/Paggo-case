@@ -1,10 +1,10 @@
 "use client";
-import Login from "@/app/Login";
+import Home from "@/app/Home";
 
 export default function HomePage() {
   return (
     <>
-      <Login/>
+      <Home />
     </>
   );
 }

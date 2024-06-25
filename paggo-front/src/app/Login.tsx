@@ -9,14 +9,15 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import {
-  USER_TYPE,
   SIGN_UP_COMMAND as SIGN_UP,
+  SIGN_IN_COMMAND as SIGN_IN,
   SIGN_IN_SUBMIT_BUTTON,
   MISSING_INFORMATION_SIGN_FORM,
   USERNAME,
   PASSWORD,
   ROUTE,
   ERROR_FORM,
+  SIGN_UP_SUBMIT_BUTTON,
 } from "@/helpers/constants";
 import Logo from "@/components/Logo";
 
@@ -27,11 +28,11 @@ import InputField from "@/components/InputField";
 
 export default function Login() {
   const router = useRouter();
-  const { setUserId, loading, setLoading } =
-    useGlobalContext();
+  const { setUserId, loading, setLoading } = useGlobalContext();
 
   const [usuário, setUsuário] = useState("");
   const [senha, setSenha] = useState("");
+  const [isLogin, setLogin] = useState(true);
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     setLoading(true);
@@ -52,7 +53,7 @@ export default function Login() {
     setUserId(user?.id);
     setLoading(false);
 
-    router.push(ROUTE.HOME);
+    isLogin ? router.push(ROUTE.HOME) : setLogin(!isLogin);
   };
 
   useEffect(() => {
@@ -111,9 +112,19 @@ export default function Login() {
                   sx={{ mt: 3, mb: 2 }}
                   disabled={loading}
                 >
-                  {loading ? <ThreeDotsLoading /> : SIGN_IN_SUBMIT_BUTTON}
+                  {loading ? (
+                    <ThreeDotsLoading />
+                  ) : isLogin ? (
+                    SIGN_IN_SUBMIT_BUTTON
+                  ) : (
+                    SIGN_UP_SUBMIT_BUTTON
+                  )}
                 </Button>
-                <SignSubmitButton route={ROUTE.SIGN_UP} command={SIGN_UP} />
+                <SignSubmitButton
+                  command={isLogin ? SIGN_UP : SIGN_IN}
+                  setLogin={setLogin}
+                  isLogin={isLogin}
+                />
               </Box>
             </Box>
           </Grid>
