@@ -38,20 +38,20 @@ export default function Login() {
     setLoading(true);
     e.preventDefault();
 
-    const isNotValidUser = !usuário.trim().length || !senha.trim().length;
-    if (isNotValidUser) {
-      setLoading(false);
-      return alert(MISSING_INFORMATION_SIGN_FORM);
-    }
+    // const isNotValidUser = !usuário.trim().length || !senha.trim().length;
+    // if (isNotValidUser) {
+    //   setLoading(false);
+    //   return alert(MISSING_INFORMATION_SIGN_FORM);
+    // }
 
-    let user = await fetchGetUser("a");
-    if (!user?.id) {
-      setLoading(false);
-      return alert(ERROR_FORM);
-    }
+    // let user = await fetchGetUser("a");
+    // if (!user?.id) {
+    //   setLoading(false);
+    //   return alert(ERROR_FORM);
+    // }
 
-    setUserId(user?.id);
-    setLoading(false);
+    // setUserId(user?.id);
+    // setLoading(false);
 
     isLogin ? router.push(ROUTE.HOME) : setLogin(!isLogin);
   };

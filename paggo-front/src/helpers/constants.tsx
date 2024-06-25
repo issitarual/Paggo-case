@@ -88,9 +88,8 @@ const USER_TYPE = {
   const DRAWER_WIDTH = 240;
   
   const ROUTE = {
-    SIGN_IN: "/login",
-    SIGN_UP: "register",
-    HOME: "/"
+    REGISTER: "/",
+    HOME: "/home"
   };
   
   const MENU_OPTIONS = {
