@@ -10,10 +10,13 @@ import DrawerMenu from "@/components/DrawerMenu";
 import { useRouter } from "next/navigation";
 import TextField from "@mui/material/TextField";
 import InputField from "@/components/InputField";
+import ImageUploader from "@/components/ImageUploader";
+import TextRecognition from "@/components/TextRecognition";
 
 export default function Home() {
   const router = useRouter();
   const { openDrawer, userId, loading, setLoading } = useGlobalContext();
+  const [selectedImage, setSelectedImage] = useState("");
   const [windowWidth, setWindowWidth] = useState(0);
   const [description, setDescription] = useState("");
 
@@ -58,7 +61,10 @@ export default function Home() {
               value={description}
               handleChange={setDescription}
             />
-            <TextField type="file" />
+            <ImageUploader
+              selectedImage={selectedImage}
+              setSelectedImage={setSelectedImage}
+            />
             <Button
               variant="contained"
               color="primary"
@@ -67,6 +73,7 @@ export default function Home() {
             >
               Carregar Imagem
             </Button>
+            <TextRecognition selectedImage={selectedImage} />
           </Box>
         </Box>
       </Main>
