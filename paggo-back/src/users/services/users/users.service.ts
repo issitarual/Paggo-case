@@ -7,7 +7,8 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(UserEntity) private readonly userRepository: Repository<UserEntity>,
+    @InjectRepository(UserEntity)
+    private readonly userRepository: Repository<UserEntity>,
   ) {}
 
   createUser(createUserDto: CreateUserDto) {
@@ -15,9 +16,15 @@ export class UsersService {
     return this.userRepository.save(newUser);
   }
 
-  findUsersById(id: number) {
-    return this.userRepository.findOne({
-      where: { id },
-    });
+  async findAll(): Promise<UserEntity[]> {
+    return this.userRepository.find();
+  }
+
+  findOne(id: number): Promise<UserEntity | null> {
+    return this.userRepository.findOneBy({ id });
+  }
+
+  async remove(id: string): Promise<void> {
+    await this.userRepository.delete(id);
   }
 }

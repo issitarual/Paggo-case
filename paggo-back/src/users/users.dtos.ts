@@ -6,6 +6,19 @@ export class CreateUserDto {
   username: string;
 
   @IsNotEmpty()
-  @MinLength(8)
+  @MinLength(3)
+  password: string;
+}
+
+export class UserDto {
+  @IsNotEmpty()
+  id: bigint
+
+  @IsNotEmpty()
+  @MinLength(3)
+  username: string;
+
+  @IsNotEmpty()
+  @MinLength(3)
   password: string;
 }

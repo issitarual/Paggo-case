@@ -2,15 +2,13 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity("users")
 export class UserEntity {
-  @PrimaryGeneratedColumn({
-    type: 'bigint',
-    name: 'user_id',
-  })
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column({
     nullable: false,
     default: '',
+    unique: true
   })
   username: string;
 
