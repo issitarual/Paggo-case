@@ -71,3 +71,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+## Docker
+Antes de rodar, subir o container com os paramêtros do arquivo .env
+```docker run -d -p DB_PORT:5432 --name DB_NAME -e POSTGRES_USER=DB_USER -e POSTGRES_DB=DB_NAME -e POSTGRES_PASSWORD=DB_PASSWORD postgres```
