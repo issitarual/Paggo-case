@@ -17,4 +17,10 @@ export class UserEntity {
     default: '',
   })
   password: string;
+
+  @Column({
+    nullable: false,
+    default: '',
+  })
+  email: string;
 }
