@@ -37,9 +37,9 @@ export class UsersController {
 
   @Put()
   async findUser(@Body() createUserDto: CreateUserDto) {
-    const {username, password} = createUserDto;
+    const {email, password} = createUserDto;
     const users = this.userService.findAll()
-    const user = (await users).find((u) => u.username == username)
+    const user = (await users).find((u) => u.email == email)
     if (user.password !== password){
       return HttpStatus.NOT_FOUND
     }
