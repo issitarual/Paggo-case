@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -7,6 +8,8 @@ import {
   Param,
   Post,
   Put,
+  Res,
+  UnauthorizedException,
   // Put,
   UsePipes,
   ValidationPipe,
@@ -15,12 +18,17 @@ import { CreateUserDto } from 'src/users/users.dtos';
 import { UsersService } from 'src/users/services/users/users.service';
 import { UserEntity } from 'src/typeorm';
 import * as bcrypt from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
+import { Response } from 'express';
 
 const saltOrRounds = 10;
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly userService: UsersService) {}
+  constructor(
+    private readonly userService: UsersService,
+    private jwtService: JwtService,
+  ) {}
 
   @Get()
   findAll(): Promise<UserEntity[]> {
@@ -34,24 +42,56 @@ export class UsersController {
 
   @Post()
   @UsePipes(ValidationPipe)
-  async createUsers(@Body() createUserDto: CreateUserDto) {
-    const hashPassword = await bcrypt.hash(createUserDto.password, saltOrRounds);
+  async createUsers(
+    @Body() createUserDto: CreateUserDto, @Res() res: Response
+  ) {
+    const { email, password, username } = createUserDto;
+    const error_message = 'Algo deu errado, tente novamente';
+    if (!email || !password || !username) {
+      throw new BadRequestException(error_message);
+    }
+    const hashPassword = await bcrypt.hash(
+      createUserDto.password,
+      saltOrRounds,
+    );
     createUserDto.password = hashPassword;
 
-    return this.userService.createUser(createUserDto);
+    const newUser = await this.userService.createUser(createUserDto);
+    if (!Object.keys(newUser).length) {
+      throw new BadRequestException(error_message);
+    }
+    return res.status(HttpStatus.CREATED).send();
   }
 
   @Put()
-  async findUser(@Body() createUserDto: CreateUserDto) {
-    const { email, password } = createUserDto;
+  async findUser(@Body() UserDto: CreateUserDto) {
+    const { email, password } = UserDto;
+    const error_message = 'Usuário ou Senha Inválidos';
+    if (!password || !email) {
+      throw new UnauthorizedException(error_message);
+    }
+
     const users = this.userService.findAll();
     const user = (await users).find((u) => u.email == email);
 
+    if (!user) {
+      throw new UnauthorizedException(error_message);
+    }
+
     const isMatch = await bcrypt.compare(password, user?.password);
     if (!isMatch) {
-      return HttpStatus.NOT_FOUND;
+      throw new UnauthorizedException(error_message);
     }
-    return user;
+
+    return {
+      access_token: this.jwtService.sign(
+        { email: user.email },
+        {
+          secret: 'topSecret512',
+          expiresIn: '50s',
+        },
+      ),
+    };
   }
 
   @Delete(':id')
