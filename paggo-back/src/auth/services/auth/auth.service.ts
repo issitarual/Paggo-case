@@ -2,6 +2,7 @@ import {
   BadRequestException,
   //   BadRequestException,
   Injectable,
+  InternalServerErrorException,
   //   InternalServerErrorException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -13,6 +14,7 @@ import { JwtService } from '@nestjs/jwt';
 // import { UserEntity } from 'src/typeorm';
 // import { CreateUserDto } from 'src/users/users.dtos';
 import { UsersService } from 'src/users/services/users/users.service';
+import { generateFromEmail } from 'unique-username-generator';
 
 @Injectable()
 export class AuthService {
@@ -41,7 +43,7 @@ export class AuthService {
     const userExists = await this.findUserByEmail(user.email);
 
     if (!userExists) {
-      return this.UsersService.createUser(user);
+      return await this.UsersService.createUser(user);
     }
 
     return this.generateJwt({
@@ -50,21 +52,21 @@ export class AuthService {
     });
   }
 
-  // async registerUser(user: CreateUserDto) {
-  //   try {
-  //     const newUser = this.UsersService.createUser(user);
-  //     (await newUser).username = generateFromEmail(user.email, 5);
+  async registerUser(user) {
+    try {
+      if(!user.username){
+        user.username = generateFromEmail(user.email, 5);
+      }
+      const newUser = await this.UsersService.createUser(user);
 
-  //     await this.userRepository.save(newUser);
-
-  //     return this.generateJwt({
-  //       sub: newUser.id,
-  //       email: newUser.email,
-  //     });
-  //   } catch {
-  //     throw new InternalServerErrorException();
-  //   }
-  // }
+      return this.generateJwt({
+        sub: newUser.id,
+        email: newUser.email,
+      });
+    } catch {
+      throw new InternalServerErrorException();
+    }
+  }
 
   async findUserByEmail(email) {
     const findUsers = await this.UsersService.findAll();

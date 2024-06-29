@@ -23,7 +23,7 @@ export class AuthController {
   @Get('redirect')
   @UseGuards(AuthGuard('google'))
   googleAuthRedirect(@Req() req) {
-    return this.authService.googleLogin(req)
+    return this.authService.signIn(req)
   }
 
   @Get('google/callback')
