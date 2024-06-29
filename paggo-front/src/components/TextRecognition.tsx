@@ -1,23 +1,57 @@
-import React, { useEffect, useState } from 'react';
-import Tesseract from 'tesseract.js';
-import { Box, Button, CssBaseline, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { Box, Typography } from "@mui/material";
 
-const TextRecognition = ({ selectedImage }: {selectedImage: string}) => {
-  const [recognizedText, setRecognizedText] = useState('');
-  useEffect(() => {
-    const recognizeText = async () => {
-      if (selectedImage) {
-        const result = await Tesseract.recognize(selectedImage);
-        setRecognizedText(result.data.text);
-      }
-    };
-    recognizeText();
-  }, [selectedImage]);
+const TextRecognition = ({
+  selectedImage,
+  recognizedText,
+}: {
+  selectedImage: string;
+  recognizedText: string;
+}) => {
+  // const [recognizedText, setRecognizedText] = useState("");
+  // useEffect(() => {
+  //   const recognizeText = async () => {
+  //     if (selectedImage) {
+  //       const result = await Tesseract.recognize(selectedImage);
+  //       setRecognizedText(result.data.text);
+  //     }
+  //   };
+  //   recognizeText();
+  // }, [selectedImage]);
   return (
-    <Box>
-      <Typography variant="h5">Recognized Text:</Typography>
-      <Typography variant="body1">{recognizedText}</Typography>
-    </Box>
+    <>
+      {recognizedText && (
+        <Box
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"space-between"}
+          width={"100%"}
+        >
+          <Box
+            component="img"
+            alt="Selected"
+            src={selectedImage}
+            sx={{
+              borderRadius: "5px",
+              border: "1px solid #1976D2",
+              width: "50%",
+            }}
+          />
+          <Box marginLeft={2} width={"50%"}>
+            <Typography
+              variant="subtitle1"
+              fontWeight={"bold"}
+              textAlign={"center"}
+            >
+              Recognized Text:
+            </Typography>
+            <Typography variant="subtitle2" textAlign={"justify"}>
+              {recognizedText}
+            </Typography>
+          </Box>
+        </Box>
+      )}
+    </>
   );
 };
 export default TextRecognition;

@@ -1,24 +1,24 @@
 import axios from "axios";
-import { UserRequest, User } from "@/types/UserType";
-import { API_URL, EMPTY_DRIVER } from "../constants";
+import { CreateUser, GetUser, User } from "@/types/UserType";
+import { API_URL, EMPTY_USER } from "../constants";
 
-const DRIVER = "/Condutor";
+const USER = "/users";
 
-const fetchPostUser = async (user: UserRequest) => {
+const fetchPostUser = async (user: CreateUser) => {
   try {
-    await axios.post<string>(`${API_URL + DRIVER}`, user);
-    return true;
+    const res = await axios.post<User>(`${API_URL + USER}`, user);
+    return res.data || EMPTY_USER;
   } catch (error) {
-    return false;
+    return EMPTY_USER;
   }
 };
 
-const fetchGetUser = async (id: string) => {
+const fetchGetUser = async (user: GetUser) => {
   try {
-    const res = await axios.get<User>(`${API_URL + DRIVER}/${id}`);
-    return res.data || EMPTY_DRIVER;
+    const res = await axios.put<User>(`${API_URL + USER}`, user);
+    return res.data || EMPTY_USER;
   } catch (error) {
-    return EMPTY_DRIVER;
+    return EMPTY_USER;
   }
 };
 

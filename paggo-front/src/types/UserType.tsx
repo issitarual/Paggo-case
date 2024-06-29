@@ -1,12 +1,19 @@
-type UserRequest = {
-  nome: string;
-  senha: string;
+type CreateUser = {
+  email: string;
+  username: string;
+  password: string;
+};
+
+type GetUser = {
+  email: string;
+  password: string;
 };
 
 type User = {
   id: string;
-  nome: string;
-  senha: string;
+  email: string;
+  username: string;
+  password: string;
 };
 
-export type { UserRequest, User };
+export type { CreateUser, GetUser, User };

@@ -28,7 +28,7 @@ export default function MainHeader() {
         >
           <MenuIcon />
         </IconButton>
-        <Box margin={3} onClick={() => route.push(ROUTE.HOME)}>
+        <Box margin={3} onClick={() => route.push(ROUTE.HOME)} sx={{backgroundColor: "red"}}>
           <Logo />
         </Box>
       </Toolbar>

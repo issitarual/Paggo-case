@@ -1,6 +1,8 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { TextField } from "@mui/material";
 import { Box } from "@mui/material";
+import { useGlobalContext } from "@/hooks/useGlobalContext";
+
 
 export default function ImageUploader({
   selectedImage,
@@ -9,6 +11,8 @@ export default function ImageUploader({
   selectedImage: string;
   setSelectedImage: Dispatch<SetStateAction<string>>;
 }) {
+  const { userId, loading, setLoading } = useGlobalContext();
+
   const handleImageUpload = (e: React.SyntheticEvent) => {
     const target = e.target as HTMLInputElement;
     const files = target.files as FileList;
@@ -16,15 +20,20 @@ export default function ImageUploader({
     setSelectedImage(URL.createObjectURL(image));
   };
   return (
-    <>
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+      }}
+    >
       <TextField
         type="file"
         inputProps={{ accept: "image/*" }}
         onChange={handleImageUpload}
+        sx={{ width: "100%" }}
       />
-      {selectedImage && (
-        <Box component="img" alt="Selected" src={selectedImage} />
-      )}
-    </>
+    </Box>
   );
 }

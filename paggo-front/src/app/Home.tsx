@@ -4,26 +4,35 @@ import { useEffect, useState } from "react";
 import React from "react";
 import Main from "@/components/Main";
 import { useGlobalContext } from "../hooks/useGlobalContext";
-import { DRAWER_WIDTH } from "@/helpers/constants";
-import MainHeader from "@/components/MainHeader";
+import { DESCRIPTION, DRAWER_WIDTH, LOAD_IMAGE, OCR_TITLE } from "@/helpers/constants";
 import DrawerMenu from "@/components/DrawerMenu";
-import { useRouter } from "next/navigation";
-import TextField from "@mui/material/TextField";
 import InputField from "@/components/InputField";
 import ImageUploader from "@/components/ImageUploader";
 import TextRecognition from "@/components/TextRecognition";
+import Tesseract from "tesseract.js";
+import ThreeDotsLoading from "@/components/ThreeDotsLoading";
 
 export default function Home() {
-  const router = useRouter();
   const { openDrawer, userId, loading, setLoading } = useGlobalContext();
   const [selectedImage, setSelectedImage] = useState("");
   const [windowWidth, setWindowWidth] = useState(0);
   const [description, setDescription] = useState("");
+  const [recognizedText, setRecognizedText] = useState("");
 
   useEffect(() => {
     setWindowWidth(window.screen.availWidth);
   }, []);
   console.log(openDrawer);
+
+  const handleRecognizeText = async (e: React.SyntheticEvent) => {
+    setLoading(true);
+    if (selectedImage) {
+      const result = await Tesseract.recognize(selectedImage);
+      setRecognizedText(result.data.text);
+    }
+    setLoading(false)
+  };
+
   return (
     <Box sx={{ minHeight: "100vh", bgcolor: grey[100] }}>
       <CssBaseline />
@@ -44,7 +53,7 @@ export default function Home() {
             component="p"
             textAlign="center"
           >
-            Transforme sua imagem em texto
+            {OCR_TITLE}
           </Typography>
           <Box
             sx={{
@@ -57,7 +66,7 @@ export default function Home() {
             component="form"
           >
             <InputField
-              name={"Descrição"}
+              name={DESCRIPTION}
               value={description}
               handleChange={setDescription}
             />
@@ -70,10 +79,15 @@ export default function Home() {
               color="primary"
               component="span"
               sx={{ mt: 3, mb: 2 }}
+              disabled={loading}
+              onClick={handleRecognizeText}
             >
-              Carregar Imagem
+              {loading ? <ThreeDotsLoading /> : LOAD_IMAGE}
             </Button>
-            <TextRecognition selectedImage={selectedImage} />
+            <TextRecognition
+              selectedImage={selectedImage}
+              recognizedText={recognizedText}
+            />
           </Box>
         </Box>
       </Main>

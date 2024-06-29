@@ -6,7 +6,8 @@ import Grid from "@mui/material/Grid";
 import { Container } from "@mui/material";
 import { useGlobalContext } from "@/hooks/useGlobalContext";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import GoogleIcon from "@mui/icons-material/Google";
 
 import {
   SIGN_UP_COMMAND as SIGN_UP,
@@ -15,14 +16,16 @@ import {
   MISSING_INFORMATION_SIGN_FORM,
   USERNAME,
   PASSWORD,
+  EMAIL,
   ROUTE,
   ERROR_FORM,
   SIGN_UP_SUBMIT_BUTTON,
+  API_URL,
 } from "@/helpers/constants";
 import Logo from "@/components/Logo";
 
 import SignSubmitButton from "@/components/SignSubmitButton";
-import { fetchGetUser } from "@/helpers/api/User";
+import { fetchGetUser, fetchPostUser } from "@/helpers/api/User";
 import ThreeDotsLoading from "@/components/ThreeDotsLoading";
 import InputField from "@/components/InputField";
 
@@ -30,30 +33,46 @@ export default function Login() {
   const router = useRouter();
   const { setUserId, loading, setLoading } = useGlobalContext();
 
-  const [usuário, setUsuário] = useState("");
-  const [senha, setSenha] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
   const [isLogin, setLogin] = useState(true);
 
   const handleSubmit = async (e: React.SyntheticEvent) => {
     setLoading(true);
     e.preventDefault();
 
-    // const isNotValidUser = !usuário.trim().length || !senha.trim().length;
-    // if (isNotValidUser) {
-    //   setLoading(false);
-    //   return alert(MISSING_INFORMATION_SIGN_FORM);
-    // }
+    let isNotValidUser = !email.trim().length || !password.trim().length;
+    if(!isLogin){
+      isNotValidUser = isNotValidUser || !username.trim().length
+    }
+    if (isNotValidUser) {
+      setLoading(false);
+      return alert(MISSING_INFORMATION_SIGN_FORM);
+    }
 
-    // let user = await fetchGetUser("a");
-    // if (!user?.id) {
-    //   setLoading(false);
-    //   return alert(ERROR_FORM);
-    // }
+    let user = isLogin
+      ? await fetchGetUser({ email, password })
+      : await fetchPostUser({ username, email, password });
+    if (!user?.id) {
+      setLoading(false);
+      return alert(ERROR_FORM);
+    }
 
-    // setUserId(user?.id);
-    // setLoading(false);
+    setUserId(user?.id);
+    setUsername("");
+    setPassword("");
+    setEmail("");
+    setLoading(false);
 
     isLogin ? router.push(ROUTE.HOME) : setLogin(!isLogin);
+  };
+
+  const handleGoogleLogin = async (e: React.SyntheticEvent) => {
+    setLoading(true);
+    e.preventDefault();
+
+    window.location.assign(API_URL + ROUTE.GOOGLE);
   };
 
   useEffect(() => {
@@ -94,22 +113,30 @@ export default function Login() {
                 onSubmit={handleSubmit}
                 sx={{ mt: 1 }}
               >
+                {!isLogin && (
+                  <InputField
+                    name={USERNAME}
+                    value={username}
+                    handleChange={setUsername}
+                  />
+                )}
                 <InputField
-                  name={USERNAME}
-                  value={usuário}
-                  handleChange={setUsuário}
+                  name={EMAIL}
+                  value={email}
+                  handleChange={setEmail}
                 />
+
                 <InputField
                   name={PASSWORD}
                   type="password"
-                  value={senha}
-                  handleChange={setSenha}
+                  value={password}
+                  handleChange={setPassword}
                 />
                 <Button
                   type="submit"
                   fullWidth
                   variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
+                  sx={{ mt: 1, mb: 2 }}
                   disabled={loading}
                 >
                   {loading ? (
@@ -120,6 +147,19 @@ export default function Login() {
                     SIGN_UP_SUBMIT_BUTTON
                   )}
                 </Button>
+                {isLogin && (
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="outlined"
+                    disabled={loading}
+                    sx={{ mb: 2 }}
+                    onClick={handleGoogleLogin}
+                  >
+                    <GoogleIcon sx={{ mr: 2 }} />
+                    Entrar com google
+                  </Button>
+                )}
                 <SignSubmitButton
                   command={isLogin ? SIGN_UP : SIGN_IN}
                   setLogin={setLogin}

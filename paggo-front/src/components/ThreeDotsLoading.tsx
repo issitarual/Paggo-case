@@ -6,7 +6,7 @@ export default function ThreeDotsLoading() {
       height="30"
       width="50"
       radius="9"
-      color="#556CD6"
+      color="white"
       ariaLabel="three-dots-loading"
       wrapperStyle={{}}
       visible={true}
