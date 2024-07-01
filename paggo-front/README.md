@@ -25,7 +25,6 @@ App that allows us to upload an image and get the text in it.
 ### Future improvements 🔮
 - [ ] Add tests
 - [ ] Fix GAuth bug (get user data)
-- [ ] Fix POST image bug
 ### Technologies
 The following tools and frameworks were used in the construction of the project:<br>
 <p>
