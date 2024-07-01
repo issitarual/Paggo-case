@@ -1,6 +1,7 @@
-link: https://paggo-case-rks2636wv-issitaruals-projects.vercel.app
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Paggo Case 👩‍💻📄
+App that allows us to upload an image and get the text in it.
 ### Preview
+#### [Try it now!](https://paggo-case-rks2636wv-issitaruals-projects.vercel.app)
 | Page  | Preview |
 | ------------- | ------------- |
 | SignIn  | ![image](https://github.com/issitarual/Paggo-case/assets/81389078/197c511c-d5ea-4f1c-a0be-edfd08bddfd0)  |
@@ -11,38 +12,47 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 | Home - image dialog | ![image](https://github.com/issitarual/Paggo-case/assets/81389078/d4dd1fb1-da44-476f-af55-744d8cd75be3)   |
 | Home - recognized text | ![image](https://github.com/issitarual/Paggo-case/assets/81389078/d273c0ac-6feb-40c1-8636-da28558b024c) |
 
+### Implemented features ✅
+- [x] Sign up 
+- [x] Sign in
+- [x] Sign in with GAuth
+- [x] Home page
+- [x] Image form to OCR
+- [x] Get recognized text
+- [x] Images from user
+- [x] Previous image dialog
+- [x] LogOut
+### Future improvements 🔮
+- [ ] Add tests
+- [ ] Fix GAuth bug (get user data)
+- [ ] Fix POST image bug
+### Technologies
+The following tools and frameworks were used in the construction of the project:<br>
+<p>
+  <img style='margin: 5px;' src='https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white'>
+  <img style='margin: 5px;' src='https://img.shields.io/badge/axios%20-%2320232a.svg?&style=for-the-badge&color=informational'>
+  <img style='margin: 5px;' src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white"/>
+  <img style='margin: 5px;' src="https://img.shields.io/badge/Material--UI-0081CB?style=for-the-badge&logo=material-ui&logoColor=white"/>
+</p>
 
-## Getting Started
-
-First, run the development server:
-
+### How to run
+1. Clone this repository
+2. Enter into the project file
+```bash
+cd Paggo-case/paggo-front
+```
+3. Install dependencies
+```bash
+npm i
+```
+4. Run the front-end with
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+5. You can optionally build the project running
+```bash
+npm run build
+npm run start
+```
+6. Finally access[http://localhost:3000](http://localhost:3000) on your favorite browser
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
