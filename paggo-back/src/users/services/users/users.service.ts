@@ -17,11 +17,19 @@ export class UsersService {
   }
 
   async findAll(): Promise<UserEntity[]> {
-    return this.userRepository.find();
+    return this.userRepository.find({
+      relations: {
+          images: true,
+      },
+  });
   }
 
   findOne(id: number): Promise<UserEntity | null> {
     return this.userRepository.findOneBy({ id });
+  }
+
+  findUserByEmail(email: string): Promise<UserEntity | null> {
+    return this.userRepository.findOneBy({ email });
   }
 
   async remove(id: string): Promise<void> {

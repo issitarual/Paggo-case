@@ -43,7 +43,8 @@ export class UsersController {
   @Post()
   @UsePipes(ValidationPipe)
   async createUsers(
-    @Body() createUserDto: CreateUserDto, @Res() res: Response
+    @Body() createUserDto: CreateUserDto,
+    @Res() res: Response,
   ) {
     const { email, password, username } = createUserDto;
     const error_message = 'Algo deu errado, tente novamente';
@@ -84,13 +85,7 @@ export class UsersController {
     }
 
     return {
-      access_token: this.jwtService.sign(
-        { email: user.email },
-        {
-          secret: 'topSecret512',
-          expiresIn: '50s',
-        },
-      ),
+      access_token: this.jwtService.sign({ email: user.email }),
     };
   }
 
