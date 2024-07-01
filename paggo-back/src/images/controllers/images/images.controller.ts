@@ -46,7 +46,6 @@ export class ImagesController {
     @Res() res: Response,
     @Req() req: Request,
   ) {
-    console.log('passei');
     const { uploadedImage, textRecognition } = createImageDto;
     const error_message = 'Algo deu errado, tente novamente';
     if (!uploadedImage || !textRecognition) {
@@ -56,7 +55,6 @@ export class ImagesController {
     const userEmail = payload.email;
     const user = await this.usersService.findUserByEmail(userEmail);
     createImageDto['user'] = user;
-
     const newImage = await this.imagesService.createImage(createImageDto);
     if (!Object.keys(newImage).length) {
       throw new BadRequestException(error_message);
