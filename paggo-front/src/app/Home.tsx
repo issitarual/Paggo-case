@@ -34,7 +34,7 @@ export default function Home() {
   useEffect(() => {
     setWindowWidth(window.screen.availWidth);
     handleUserImages();
-  }, []);
+  }, [recognizedText]);
 
   const getToken = () => {
     const token = localStorage?.getItem("paggo_token");
