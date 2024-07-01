@@ -4,10 +4,6 @@ type CreateImage = {
   textRecognition: string;
 };
 
-type GetImages = {
-  userId: string;
-};
-
 type Image = {
   id: string;
   uploadedImage: string;
@@ -17,4 +13,4 @@ type Image = {
   textRecognition: string;
 };
 
-export type { CreateImage, GetImages, Image };
+export type { CreateImage, Image };

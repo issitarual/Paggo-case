@@ -24,7 +24,7 @@ import {
 import { CreateImage, Image } from "@/types/ImageType";
 
 export default function Home() {
-  const { openDrawer, userId, loading, setLoading } = useGlobalContext();
+  const { openDrawer, loading, setLoading } = useGlobalContext();
   const [selectedImage, setSelectedImage] = useState("");
   const [windowWidth, setWindowWidth] = useState(0);
   const [description, setDescription] = useState("");
@@ -49,7 +49,6 @@ export default function Home() {
 
   const handleRecognizeText = async (e: React.SyntheticEvent) => {
     e.preventDefault();
-    setLoading(true);
 
     if (recognizedText) {
       setDescription("");
@@ -58,6 +57,7 @@ export default function Home() {
     }
 
     if (selectedImage) {
+      setLoading(true);
       const text = await fetchGetRecognizedText(selectedImage);
       handlePostImage(text);
 
