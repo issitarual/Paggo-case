@@ -1,7 +1,5 @@
 # Paggo-case
 🖺 App that allows users to automatically extract text from an uploaded image.
-### Database Schema
-![paggo-case](https://github.com/issitarual/Paggo-case/assets/81389078/fe092483-f1bc-400a-9381-4fb250dd73ed)
 ### SignUp Schema
 ![Diagrama sem nome drawio](https://github.com/issitarual/Paggo-case/assets/81389078/0e0c3bc9-53ce-4705-ab7d-c82b0573c05b)
 ### SingIn Schema
@@ -11,4 +9,5 @@
 
 
 Obs: Run front-end in one port and back-end in another.
+
 Ex: Back-end in port 8080 and Front-end in port 3000
