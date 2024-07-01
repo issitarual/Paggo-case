@@ -1,5 +1,16 @@
 link: https://paggo-case-rks2636wv-issitaruals-projects.vercel.app
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### Preview
+| Page  | Preview |
+| ------------- | ------------- |
+| SignIn  | ![image](https://github.com/issitarual/Paggo-case/assets/81389078/197c511c-d5ea-4f1c-a0be-edfd08bddfd0)  |
+| SignUp | ![image](https://github.com/issitarual/Paggo-case/assets/81389078/dd916767-cf3f-4748-acee-ffc342db5def)  |
+| Home | ![image](https://github.com/issitarual/Paggo-case/assets/81389078/0e5db488-2c98-479b-9b5f-800d7ba0b2c9)  |
+| Home - sidebar with images | ![image](https://github.com/issitarual/Paggo-case/assets/81389078/5df4fdf5-05c3-437f-8a4e-dfdfa95e2e21)  |
+| Home - sidebar without images | ![image](https://github.com/issitarual/Paggo-case/assets/81389078/aad1ee48-506f-4a6b-83e3-5c2a20ef1512)  |
+| Home - image dialog | ![image](https://github.com/issitarual/Paggo-case/assets/81389078/d4dd1fb1-da44-476f-af55-744d8cd75be3)   |
+| Home - recognized text | ![image](https://github.com/issitarual/Paggo-case/assets/81389078/d273c0ac-6feb-40c1-8636-da28558b024c) |
+
 
 ## Getting Started
 
