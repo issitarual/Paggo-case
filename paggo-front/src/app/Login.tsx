@@ -23,6 +23,7 @@ import {
   API_URL,
 } from "@/helpers/constants";
 import Logo from "@/components/Logo";
+import { signIn } from 'next-auth/react';
 
 import SignSubmitButton from "@/components/SignSubmitButton";
 import { fetchGetUser, fetchPostUser } from "@/helpers/api/User";
@@ -162,7 +163,7 @@ export default function Login() {
                     sx={{ mb: 2 }}
                     onClick={handleGoogleLogin}
                   >
-                    <GoogleIcon sx={{ mr: 2 }} />
+                    <GoogleIcon sx={{ mr: 2 }}/>
                     Entrar com google
                   </Button>
                 )}
