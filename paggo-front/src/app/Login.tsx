@@ -23,7 +23,6 @@ import {
   API_URL,
 } from "@/helpers/constants";
 import Logo from "@/components/Logo";
-import { signIn } from 'next-auth/react';
 
 import SignSubmitButton from "@/components/SignSubmitButton";
 import { fetchGetUser, fetchPostUser } from "@/helpers/api/User";
@@ -32,7 +31,7 @@ import InputField from "@/components/InputField";
 
 export default function Login() {
   const router = useRouter();
-  const { setUserId, loading, setLoading } = useGlobalContext();
+  const { loading, setLoading } = useGlobalContext();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -58,9 +57,8 @@ export default function Login() {
       token
         ? localStorage.setItem("paggo_token", JSON.stringify(token))
         : (validate = false);
-    }
-    else{
-      validate = !!await fetchPostUser({ username, email, password });
+    } else {
+      validate = !!(await fetchPostUser({ username, email, password }));
     }
     if (!validate) {
       setLoading(false);
@@ -163,7 +161,7 @@ export default function Login() {
                     sx={{ mb: 2 }}
                     onClick={handleGoogleLogin}
                   >
-                    <GoogleIcon sx={{ mr: 2 }}/>
+                    <GoogleIcon sx={{ mr: 2 }} />
                     Entrar com google
                   </Button>
                 )}

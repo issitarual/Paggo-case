@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CreateImage, GetImages, Image } from "@/types/ImageType";
+import { CreateImage, Image } from "@/types/ImageType";
 import { API_URL } from "../constants";
 import Tesseract from "tesseract.js";
 

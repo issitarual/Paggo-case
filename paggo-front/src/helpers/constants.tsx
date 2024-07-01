@@ -1,8 +1,3 @@
-const USER_TYPE = {
-  DRIVER: "Motorista",
-  RIDER: "Passageiro",
-};
-
 const SIGN_UP_COMMAND = "Não possui uma conta? Cadastre-se";
 
 const SIGN_IN_COMMAND = "Já possui uma conta? Entre já!";
@@ -49,24 +44,8 @@ const ROUTE = {
   GOOGLE: "/auth/google/",
 };
 
-const EMPTY_USER = {
-  id: "",
-  name: "",
-  email: "",
-  password: "",
-};
-
-const EMPTY_IMAGE = {
-  date: "",
-  uploadedImage: "",
-  description: "",
-  userId: "0",
-  uploadedAt: "",
-  textRecognition: "",
-};
 
 export {
-  USER_TYPE,
   SIGN_UP_COMMAND,
   SIGN_IN_COMMAND,
   APP_NAME,
@@ -76,13 +55,11 @@ export {
   MISSING_INFORMATION_SIGN_FORM,
   ERROR_FORM,
   DRAWER_WIDTH,
-  EMPTY_USER,
   USERNAME,
   PASSWORD,
   EMAIL,
   ROUTE,
   HOME_ERROR_MESSAGE,
-  EMPTY_IMAGE,
   IMAGES,
   USER_WITHOUT_IMAGES,
   LOGOUT,

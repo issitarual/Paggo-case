@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Box, Typography } from "@mui/material";
 
 const TextRecognition = ({
@@ -8,7 +8,6 @@ const TextRecognition = ({
   selectedImage: string;
   recognizedText: string;
 }) => {
-  
   return (
     <>
       {recognizedText && (
