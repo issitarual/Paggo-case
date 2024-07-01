@@ -14,7 +14,6 @@ This is an API project that receives an image and returns it text.
 - [x] Get User Image list
 ### Future improvements 🔮
 - [ ] Fix GAuth bug
-- [ ] Fix jwt validation when create image bug
 - [ ] Add validations
 - [ ] Add tests
 ### Technologies
