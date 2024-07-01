@@ -1,7 +1,6 @@
 # Paggo Case 👩‍💻📄
 App that allows us to upload an image and get the text in it.
 ### Preview
-#### [Try it now!](https://paggo-case-rks2636wv-issitaruals-projects.vercel.app)
 | Page  | Preview |
 | ------------- | ------------- |
 | SignIn  | ![image](https://github.com/issitarual/Paggo-case/assets/81389078/197c511c-d5ea-4f1c-a0be-edfd08bddfd0)  |
