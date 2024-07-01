@@ -7,6 +7,7 @@ import { useGlobalContext } from "../hooks/useGlobalContext";
 import {
   DESCRIPTION,
   DRAWER_WIDTH,
+  LOAD_ANOTHER_IMAGE,
   LOAD_IMAGE,
   OCR_TITLE,
 } from "@/helpers/constants";
@@ -14,7 +15,6 @@ import DrawerMenu from "@/components/DrawerMenu";
 import InputField from "@/components/InputField";
 import ImageUploader from "@/components/ImageUploader";
 import TextRecognition from "@/components/TextRecognition";
-import Tesseract from "tesseract.js";
 import ThreeDotsLoading from "@/components/ThreeDotsLoading";
 import {
   fetchPostImage,
@@ -50,6 +50,12 @@ export default function Home() {
   const handleRecognizeText = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     setLoading(true);
+
+    if (recognizedText) {
+      setDescription("");
+      setRecognizedText("");
+      return;
+    }
 
     if (selectedImage) {
       const text = await fetchGetRecognizedText(selectedImage);
@@ -112,10 +118,7 @@ export default function Home() {
               value={description}
               handleChange={setDescription}
             />
-            <ImageUploader
-              selectedImage={selectedImage}
-              setSelectedImage={setSelectedImage}
-            />
+            <ImageUploader setSelectedImage={setSelectedImage} />
             <Button
               variant="contained"
               color="primary"
@@ -124,7 +127,13 @@ export default function Home() {
               disabled={loading}
               onClick={handleRecognizeText}
             >
-              {loading ? <ThreeDotsLoading /> : LOAD_IMAGE}
+              {loading ? (
+                <ThreeDotsLoading />
+              ) : !recognizedText ? (
+                LOAD_IMAGE
+              ) : (
+                LOAD_ANOTHER_IMAGE
+              )}
             </Button>
             <TextRecognition
               selectedImage={selectedImage}

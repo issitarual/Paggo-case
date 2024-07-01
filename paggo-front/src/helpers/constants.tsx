@@ -32,6 +32,8 @@ const OCR_TITLE = "Transforme sua imagem em texto"
 
 const LOAD_IMAGE = "Carregar Imagem"
 
+const LOAD_ANOTHER_IMAGE = "Carregar outra imagem"
+
 const HOME_ERROR_MESSAGE = {
   USER_NOT_FOUND: "Usuário não encontrado",
 };
@@ -65,5 +67,6 @@ export {
   LOGOUT,
   OCR_TITLE,
   LOAD_IMAGE,
+  LOAD_ANOTHER_IMAGE,
   DESCRIPTION
 };
