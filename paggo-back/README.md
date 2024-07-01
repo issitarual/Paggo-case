@@ -1,77 +1,40 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Paggo Case
+### About 🔎
+This is an API project that receives an image and returns it text.
+### Database Schema
+![paggo-case](https://github.com/issitarual/Paggo-case/assets/81389078/fe092483-f1bc-400a-9381-4fb250dd73ed)
+### Implemented features ✅
+- [x] Create user
+- [x] Get users
+- [x] Get user by id
+- [x] Update user
+- [x] Delete user
+- [x] Create token
+- [x] Create Image
+- [x] Get User Image list
+### Future improvements 🔮
+- [ ] Fix GAuth bug
+- [ ] Fix jwt validation when create image bug
+- [ ] Add validations
+- [ ] Add tests
+### Technologies
+The following tools and frameworks were used in the construction of the project:
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+![Python](https://img.shields.io/badge/javascript-3670A0?style=for-the-badge&logo=javascript&logoColor=ffdd54)
+![FastAPI](https://img.shields.io/badge/NestJS-005571?style=for-the-badge&logo=nestjs)
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
-
+## How to run
+1. Clone this repository
+2. Clone the [front-end repository](https://github.com/issitarual/verzel-challenge-front)
+3. Follow instructions to run [front-end]([https://github.com/issitarual/verzel-challenge-front](https://github.com/issitarual/Paggo-case/tree/main/paggo-front))
+4. Create your ``.env`` file on the root of the back-end folder following ``.env.example`` instructions
+5. Create a database using the ``docker`` and ``.env`` file constants
 ```bash
-$ npm install
+docker run -d -p DB_PORT:5432 --name DB_NAME -e POSTGRES_USER=DB_USER -e POSTGRES_DB=DB_NAME -e POSTGRES_PASSWORD=DB_PASSWORD postgres
 ```
-
-## Running the app
-
+7. Run your project
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm i
+npm run start:dev
 ```
-
-## Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
-```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
-
-## Docker
-Antes de rodar, subir o container com os paramêtros do arquivo .env
-```docker run -d -p DB_PORT:5432 --name DB_NAME -e POSTGRES_USER=DB_USER -e POSTGRES_DB=DB_NAME -e POSTGRES_PASSWORD=DB_PASSWORD postgres```
