@@ -28,11 +28,14 @@ import {
 } from "@/helpers/constants";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { useRouter } from "next/navigation";
+import { Image } from "@/types/ImageType";
+import { SimpleDialog } from "./Dialog";
 
-export default function PersistentDrawerLeft() {
+export default function PersistentDrawerLeft({ images }: { images: Image[] }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  const [images, setImages] = React.useState([]);
+  const [openDialog, setOpenDialog] = React.useState(false);
+  const [selectedImage, setSelectedImage] = React.useState<Image | null>(null);
   const router = useRouter();
 
   const handleDrawerOpen = () => {
@@ -41,6 +44,25 @@ export default function PersistentDrawerLeft() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const handleLogOut = () => {
+    localStorage.removeItem("paggo_token");
+    router.push(ROUTE.REGISTER);
+  };
+
+  const handleShowImage = (image: Image) => {
+    setSelectedImage(image);
+    handleClickOpenDialog();
+  };
+
+  const handleClickOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setSelectedImage(null);
+    setOpenDialog(false);
   };
 
   return (
@@ -106,24 +128,27 @@ export default function PersistentDrawerLeft() {
         )}
         <Box>
           <List>
-            {["12/06", "12/07", "12/08", "12/09"].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
+            {images.map((i, index) => (
+              <ListItem key={index} disablePadding>
+                <ListItemButton onClick={() => handleShowImage(i)}>
                   <ListItemIcon>
                     <ArticleIcon />
                   </ListItemIcon>
-                  <ListItemText primary={text} />
+                  <ListItemText primary={i.description} />
                 </ListItemButton>
               </ListItem>
             ))}
           </List>
+          {selectedImage && (
+            <SimpleDialog
+              selectedValue={selectedImage}
+              open={open}
+              onClose={handleCloseDialog}
+            />
+          )}
           <List sx={{ position: "fixed", bottom: 0, width: DRAWER_WIDTH }}>
             <Divider />
-            <ListItem
-              key={LOGOUT}
-              onClick={() => router.push(ROUTE.REGISTER)}
-              disablePadding
-            >
+            <ListItem key={LOGOUT} onClick={handleLogOut} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
                   <ExitToAppIcon />

@@ -43,23 +43,29 @@ export default function Login() {
     e.preventDefault();
 
     let isNotValidUser = !email.trim().length || !password.trim().length;
-    if(!isLogin){
-      isNotValidUser = isNotValidUser || !username.trim().length
+    if (!isLogin) {
+      isNotValidUser = isNotValidUser || !username.trim().length;
     }
     if (isNotValidUser) {
       setLoading(false);
       return alert(MISSING_INFORMATION_SIGN_FORM);
     }
 
-    let user = isLogin
-      ? await fetchGetUser({ email, password })
-      : await fetchPostUser({ username, email, password });
-    if (!user?.id) {
+    let validate = true;
+    if (isLogin) {
+      const token = await fetchGetUser({ email, password });
+      token
+        ? localStorage.setItem("paggo_token", JSON.stringify(token))
+        : (validate = false);
+    }
+    else{
+      validate = !!await fetchPostUser({ username, email, password });
+    }
+    if (!validate) {
       setLoading(false);
       return alert(ERROR_FORM);
     }
 
-    setUserId(user?.id);
     setUsername("");
     setPassword("");
     setEmail("");

@@ -4,21 +4,25 @@ import { API_URL, EMPTY_USER } from "../constants";
 
 const USER = "/users";
 
+interface Response {
+  access_token: string;
+}
+
 const fetchPostUser = async (user: CreateUser) => {
   try {
-    const res = await axios.post<User>(`${API_URL + USER}`, user);
-    return res.data || EMPTY_USER;
+    const res = await axios.post<number>(`${API_URL + USER}`, user);
+    return res?.status === 201
   } catch (error) {
-    return EMPTY_USER;
+    return false;
   }
 };
 
 const fetchGetUser = async (user: GetUser) => {
   try {
-    const res = await axios.put<User>(`${API_URL + USER}`, user);
-    return res.data || EMPTY_USER;
+    const res = await axios.put<Response>(`${API_URL + USER}`, user);
+    return  res?.data?.access_token;
   } catch (error) {
-    return EMPTY_USER;
+    return false;
   }
 };
 

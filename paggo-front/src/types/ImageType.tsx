@@ -1,7 +1,7 @@
 type CreateImage = {
   uploadedImage: string;
   description: string;
-  userId: string;
+  textRecognition: string;
 };
 
 type GetImages = {

@@ -8,16 +8,7 @@ const TextRecognition = ({
   selectedImage: string;
   recognizedText: string;
 }) => {
-  // const [recognizedText, setRecognizedText] = useState("");
-  // useEffect(() => {
-  //   const recognizeText = async () => {
-  //     if (selectedImage) {
-  //       const result = await Tesseract.recognize(selectedImage);
-  //       setRecognizedText(result.data.text);
-  //     }
-  //   };
-  //   recognizeText();
-  // }, [selectedImage]);
+  
   return (
     <>
       {recognizedText && (
