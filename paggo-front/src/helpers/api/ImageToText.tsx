@@ -7,7 +7,6 @@ const IMAGE = "/images";
 
 const fetchPostImage = async (image: CreateImage, token: string) => {
   try {
-    console.log(image);
     const res = await axios.post<number>(`${API_URL + IMAGE}`, image, {
       headers: { Authorization: `Bearer ${token}` },
     });

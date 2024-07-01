@@ -17,7 +17,6 @@ export function SimpleDialog(props: SimpleDialogProps) {
   const handleListItemClick = () => {
     onClose();
   };
-  console.log(selectedValue);
 
   return (
     <Dialog onClose={onClose} open={open}>
