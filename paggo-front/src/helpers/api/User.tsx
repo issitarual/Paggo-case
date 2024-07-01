@@ -1,6 +1,6 @@
 import axios from "axios";
-import { CreateUser, GetUser, User } from "@/types/UserType";
-import { API_URL, EMPTY_USER } from "../constants";
+import { CreateUser, GetUser } from "@/types/UserType";
+import { API_URL } from "../constants";
 
 const USER = "/users";
 
